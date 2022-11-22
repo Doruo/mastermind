@@ -27,6 +27,15 @@ public class Main { // à renommer en main pour online compiler
     public static void DoubleSautLigne() 
     {sautLigne();sautLigne();}
     
+    public static void affIntTab (int[]tab)
+    {
+        for (int i=0; i<tab.length;i++)
+        {
+            System.out.print(tab[i]+" ");
+        }
+    }
+    
+    
     // ////////////////////////////////////////////////////////////////////////////////////////////
     
 	//____________________________________________________________
@@ -282,16 +291,17 @@ public class Main { // à renommer en main pour online compiler
                 System.out.println("Veillez resaisir couleur n°"+ indiceAff);
                 saisie = scanner.next().charAt(0);
             }
-            propCodeHumain[i]= saisie;
+            propCodeHumain[i] = saisie;
+            motVersEntiers(saisie,tabCouleurs);
+            affIntTab(propCodeHumain[i]);
+            
             indiceAff++;
         }    
         sautLigne();
         System.out.print("Code Proposé :  ");
          
-        for (int i=0; i<lgCode;i++)
-        {
-            System.out.print(propCodeHumain[i] + " ");
-        }
+        affIntTab(propCodeHumain);
+        
         sautLigne();
         return propCodeHumain;
     }  
@@ -409,14 +419,13 @@ public class Main { // à renommer en main pour online compiler
         int[] codeSecret;
         codeSecret = new int [lgCode];
         codeSecret=codeAleat(lgCode, tabCouleurs.length);
-        System.out.println(codeSecret);
 
         System.out.println("Manche n° "+ numManche);
-        for (int i=0; i<=nbEssaisMax;i++)
+        for (int i=0; i<nbEssaisMax;i++)
         {
             numEssais=i+1;
 
-            if (i==nbEssaisMax) // Fin Manche : humain n'a pas trouvé code après nombre d'essais
+            if (i==nbEssaisMax-1) // Fin Manche : humain n'a pas trouvé code après nombre d'essais
             { // Cela est fait une fois nbEssaisMax atteint, on ne redemande donc pas une saisie 
                 System.out.println("Dommage, manche terminé !");
                 score=nbEssaisMax;
@@ -689,15 +698,15 @@ public class Main { // à renommer en main pour online compiler
         {
             sautLigne();
             System.out.println("Type de Partie :");
-            System.out.println("Décodeur Humain VS Codeur IA     [1]");
-            System.out.println("Codeur Humain VS Decodeur IA     [2] (NON DISPO)");
+            System.out.println("Décodeur Humain Contre Codeur IA     [1]");
+            System.out.println("Codeur Humain Contre Decodeur IA     [2] (//////)");
             int input = scanner.nextInt();
     
             if (input == 1) // Manche Humain 
             {
                 sautLigne();
-                System.out.println("Mode choisie : Décodeur Humain VS Codeur IA"); 
-                System.out.println("C'est partit !"); sautLigne();
+                System.out.println("Mode choisie : Décodeur Humain Contre Codeur IA"); 
+                System.out.println("A toi de jouer !"); sautLigne();
                 for (int i=1; i<nbManches+1;i++)
                 {
                     mancheHumain(lgCode, tabCouleurs, i, nbEssaisMax);
